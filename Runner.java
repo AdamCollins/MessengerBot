@@ -15,12 +15,11 @@ public class Runner
     private static Point writePoint;
 
     public static void main(String[] args) throws InterruptedException {
-        System.out.println("OK. Love you sara".contains("sara"));
         Thread.sleep(5000);
         game = null;
         readPoint = new Point(733, 853);
         writePoint = new Point(722, 941);
-        //readChat();
+        readChat();
     }
 
     private static void readChat() throws InterruptedException {
