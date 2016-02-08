@@ -17,8 +17,8 @@ public class Runner
     public static void main(String[] args) throws InterruptedException {
         Thread.sleep(5000);
         game = null;
-        readPoint = new Point(733, 853);
-        writePoint = new Point(722, 941);
+        readPoint = new Point(335, 578); //MUST be set in right pos. Use FindMousePos to set.
+        writePoint = new Point(317, 648);//MUST be set in right pos. Use FindMousePos to set.
         readChat();
     }
 
