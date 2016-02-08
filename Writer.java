@@ -66,6 +66,22 @@ public class Writer
                 robot.keyRelease(KeyEvent.VK_QUOTE);
                 return;
             }
+            case '?':
+            {
+                robot.keyPress(KeyEvent.VK_SHIFT);
+                robot.keyPress(KeyEvent.VK_SLASH);
+                robot.keyRelease(KeyEvent.VK_SLASH);
+                robot.keyRelease(KeyEvent.VK_SHIFT);
+                return;
+            }
+            case '!':
+            {
+                robot.keyPress(KeyEvent.VK_SHIFT);
+                robot.keyPress(KeyEvent.VK_1);
+                robot.keyRelease(KeyEvent.VK_1);
+                robot.keyRelease(KeyEvent.VK_SHIFT);
+                return;
+            }
         }
 
             waitFor(20);

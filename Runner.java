@@ -27,7 +27,7 @@ public class Runner
         writer = new Writer();
         String prevInput = " ";
         long startTime = System.currentTimeMillis();
-        long messageCount = 0;
+        long messageCount = 1;
         int es = 0;
         simpleMessage("Hello, I am back again!");
         while(true)
@@ -38,80 +38,70 @@ public class Runner
             String input;
             try{input = reader.read().trim().toLowerCase();}catch (NullPointerException e) {input = "";}
             System.out.println(input);
+            if(!input.equals(prevInput)) {
+                System.out.println("uniqe message");
+                if (messageCount % 100 == 0)
+                    simpleMessage("Yay! I lasted " + messageCount + " messages without dying!");
+                if (input.equalsIgnoreCase("[Exit!]")) {
+                    simpleMessage("Time to sleep. Goodnight!");
+                    waitFor(3000);
+                    System.exit(0);
+                    return;
+                }
+                if (input.contains("e")) {
+                    if (!input.equals(prevInput)) {
+                        es++;
+                        if (es % 100 == 0) simpleMessage("You have used the letter 'e' " + es + " times");
+                    }
+                }
 
-            if(messageCount%100==0) simpleMessage("Yay! I lasted " + messageCount + " messages without dying!");
-
-            if(input.contains("e"))
-            {
-                if(!input.equals(prevInput))
+                if (input.equals("[2048]".trim())) {
+                    try {
+                        game.isRunning();
+                    } catch (Exception e) {
+                        Game game = new Game(readPoint, writePoint);
+                    }
+                } else if (input.contains("nsfw")) {
+                    simpleMessage("*unzips pants*");
+                } else if (input.contains("[loop]")) {
+                    System.out.println(input.substring(9));
+                    int n = 0;
+                    if (input.length() > 6) n = Integer.parseInt(input.charAt(7) + "");
+                    Mouse.move(writePoint);
+                    Mouse.click();
+                    for (int i = 0; i < n; i++){
+                        writer.type(input.substring(9));
+                        writer.newLine();
+                    }
+                } else if (input.contains(" bot")) {
+                    if (input.contains("computer")) simpleMessage("Im not a computer I am a real boy!");
+                    else if (Math.random() > 0.5) simpleMessage("Don't talk to me like im not here.");
+                    else simpleMessage("I can hear you you know.");
+                } else if (input.contains("sad")) {
+                    simpleMessage("MessangerBot is sad when you are sad");
+                } else if (input.contains("japan") || input.contains("taiwan")) {
+                    Mouse.move(writePoint);
+                    Mouse.click();
+                    writer.type("Taiwan #1!");
+                } else if (input.contains("goodnight")) {
+                    simpleMessage("<3");
+                }else if (input.contains("Hello?"))
                 {
-                    es++;
-                    if (es % 100 == 0) simpleMessage("You have used the letter 'e' " + es + " times");
+                    int option = (int)(Math.random()*5);
+                    if(option==0)simpleMessage("Hello");
+                    else if(option==1)simpleMessage("Hi! How are you?");
+                    else if(option==2)simpleMessage("Hello! I am MessengerBot.");
+                    else simpleMessage("*Beep Boop* I am a r0b0t!");
                 }
-            }
+                else if (input.contains("love you")) {
+                    if (Math.random() * 10 > 8) simpleMessage("Do you love Messanger bot?");
+                } else if (input.contains("sara") && !input.contains("*") && !input.contains("typing")) {
+                    if (Math.random() * 30 > 27) simpleMessage("Sarah*");
+                }
 
-            if(input.equals("[2048]".trim()))
-            {
-                try {
-                    game.isRunning();
-                }catch (Exception e) {
-                    Game game = new Game(readPoint, writePoint);
-                }
-            }
-            else if(input.contains("nsfw"))
-            {
-               simpleMessage("*unzips pants*");
-            }
-            else if(input.contains("[loop]"))
-            {
-                System.out.println(input.substring(9));
-                int n = 0;
-                if(input.length()>6)n =Integer.parseInt(input.charAt(7)+"");
-                Mouse.move(writePoint);
-                Mouse.click();
-                for (int i = 0; i<n; i++)
-                {
-                    writer.type(input.substring(9));
-                    writer.newLine();
-                }
-            }
-            else if(input.contains(" bot"))
-            {
-                if(input.contains("computer")) simpleMessage("Im not a computer I am a real boy!");
-                else
-                if(Math.random()>0.5)simpleMessage("Don't talk to me like im not here.");
-                else simpleMessage("I can hear you you know.");
-            }
-            else if(input.contains("sad"))
-            {
-                simpleMessage("MessangerBot is sad when you are sad");
-            }
-            else if (input.contains("japan") || input.contains("taiwan"))
-            {
-                Mouse.move(writePoint);
-                Mouse.click();
-                writer.type("Taiwan #1!");
-            }
-            else if(input.contains("goodnight"))
-            {
-                simpleMessage("<3");
-            }
-            else if(input.contains("love you"))
-            {
-                if(Math.random()*10>8) simpleMessage("Do you love Messanger bot?");
-            }
-            else if(input.contains("sara") && !input.contains("*") && !input.contains("typing"))
-            {
-                if(Math.random()*30>27)simpleMessage("Sarah*");
-            }
-            else if(input.equalsIgnoreCase("[Exit!]"))
-            {
-                simpleMessage("Time to sleep. Goodnight!");
-                System.exit(0);
-                return;
+                messageCount++;
             }
             writer.escape();
-            if(!input.equals(prevInput)) messageCount++;
             prevInput = input;
         }
     }
@@ -123,5 +113,14 @@ public class Runner
         writer.type("MessangerBot: ");
         writer.type(m);
         writer.newLine();
+    }
+
+    private static void waitFor(int t)
+    {
+        try {
+            Thread.sleep(t);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
