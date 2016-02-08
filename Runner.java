@@ -25,15 +25,31 @@ public class Runner
     private static void readChat() throws InterruptedException {
         reader = new Reader();
         writer = new Writer();
+        String prevInput = " ";
+        long startTime = System.currentTimeMillis();
+        long messageCount = 0;
         int es = 0;
-
+        simpleMessage("Hello, I am back again!");
         while(true)
         {
+
             Thread.sleep(2500);
             Mouse.move(readPoint);
             String input;
             try{input = reader.read().trim().toLowerCase();}catch (NullPointerException e) {input = "";}
             System.out.println(input);
+
+            if(messageCount%100==0) simpleMessage("Yay! I lasted " + messageCount + " messages without dying!");
+
+            if(input.contains("e"))
+            {
+                if(!input.equals(prevInput))
+                {
+                    es++;
+                    if (es % 100 == 0) simpleMessage("You have used the letter 'e' " + es + " times");
+                }
+            }
+
             if(input.equals("[2048]".trim()))
             {
                 try {
@@ -44,11 +60,7 @@ public class Runner
             }
             else if(input.contains("nsfw"))
             {
-                Mouse.move(writePoint);
-                Mouse.click();
-                writer.type("MessangerBot: ");
-                writer.type("*unzips pants*");
-                writer.newLine();
+               simpleMessage("*unzips pants*");
             }
             else if(input.contains("[loop]"))
             {
@@ -65,8 +77,14 @@ public class Runner
             }
             else if(input.contains(" bot"))
             {
+                if(input.contains("computer")) simpleMessage("Im not a computer I am a real boy!");
+                else
                 if(Math.random()>0.5)simpleMessage("Don't talk to me like im not here.");
                 else simpleMessage("I can hear you you know.");
+            }
+            else if(input.contains("sad"))
+            {
+                simpleMessage("MessangerBot is sad when you are sad");
             }
             else if (input.contains("japan") || input.contains("taiwan"))
             {
@@ -78,10 +96,9 @@ public class Runner
             {
                 simpleMessage("<3");
             }
-            else if(input.contains("e"))
+            else if(input.contains("love you"))
             {
-                es++;
-                if(es%100==0) simpleMessage("You have used the letter 'e' " + es + "times");
+                if(Math.random()*10>8) simpleMessage("Do you love Messanger bot?");
             }
             else if(input.contains("sara") && !input.contains("*") && !input.contains("typing"))
             {
@@ -89,10 +106,13 @@ public class Runner
             }
             else if(input.equalsIgnoreCase("[Exit!]"))
             {
+                simpleMessage("Time to sleep. Goodnight!");
                 System.exit(0);
+                return;
             }
             writer.escape();
-
+            if(!input.equals(prevInput)) messageCount++;
+            prevInput = input;
         }
     }
 
