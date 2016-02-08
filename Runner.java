@@ -85,7 +85,7 @@ public class Runner
                     writer.type("Taiwan #1!");
                 } else if (input.contains("goodnight")) {
                     simpleMessage("<3");
-                }else if (input.contains("Hello?"))
+                }else if (input.contains("hello?"))
                 {
                     int option = (int)(Math.random()*5);
                     if(option==0)simpleMessage("Hello");
