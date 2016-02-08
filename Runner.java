@@ -25,6 +25,8 @@ public class Runner
     private static void readChat() throws InterruptedException {
         reader = new Reader();
         writer = new Writer();
+        int es = 0;
+
         while(true)
         {
             Thread.sleep(2500);
@@ -61,11 +63,25 @@ public class Runner
                     writer.newLine();
                 }
             }
+            else if(input.contains(" bot"))
+            {
+                if(Math.random()>0.5)simpleMessage("Don't talk to me like im not here.");
+                else simpleMessage("I can hear you you know.");
+            }
             else if (input.contains("japan") || input.contains("taiwan"))
             {
                 Mouse.move(writePoint);
                 Mouse.click();
                 writer.type("Taiwan #1!");
+            }
+            else if(input.contains("goodnight"))
+            {
+                simpleMessage("<3");
+            }
+            else if(input.contains("e"))
+            {
+                es++;
+                if(es%100==0) simpleMessage("You have used the letter 'e' " + es + "times");
             }
             else if(input.contains("sara") && !input.contains("*") && !input.contains("typing"))
             {

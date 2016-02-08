@@ -52,6 +52,20 @@ public class Writer
                 robot.keyRelease(KeyEvent.VK_SHIFT);
                 return;
             }
+            case '<':
+            {
+                robot.keyPress(KeyEvent.VK_SHIFT);
+                robot.keyPress(KeyEvent.VK_COMMA);
+                robot.keyRelease(KeyEvent.VK_COMMA);
+                robot.keyRelease(KeyEvent.VK_SHIFT);
+                return;
+            }
+            case '\'':
+            {
+                robot.keyPress(KeyEvent.VK_QUOTE);
+                robot.keyRelease(KeyEvent.VK_QUOTE);
+                return;
+            }
         }
 
             waitFor(20);
