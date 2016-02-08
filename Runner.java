@@ -70,7 +70,7 @@ public class Runner
             }
             else if(input.contains("sara") && !input.contains("*") && !input.contains("typing"))
             {
-                simpleMessage("Sarah*");
+                if(Math.random()*30>28)simpleMessage("Sarah*");
             }
             else if(input.equalsIgnoreCase("[Exit!]"))
             {
