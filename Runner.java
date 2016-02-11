@@ -27,9 +27,9 @@ public class Runner
         writer = new Writer();
         String prevInput = " ";
         long startTime = System.currentTimeMillis();
-        long messageCount = 1;
+        long messegeCount = 1;
         int es = 0;
-        simpleMessage("Hello, I am back again!");
+        simpleMessege("Hello, I am back again!");
         while(true)
         {
 
@@ -39,11 +39,11 @@ public class Runner
             try{input = reader.read().trim().toLowerCase();}catch (NullPointerException e) {input = "";}
             System.out.println(input);
             if(!input.equals(prevInput)) {
-                System.out.println("uniqe message");
-                if (messageCount % 100 == 0)
-                    simpleMessage("Yay! I lasted " + messageCount + " messages without dying!");
+                System.out.println("uniqe messege");
+                if (messegeCount % 100 == 0)
+                    simpleMessege("Yay! I lasted " + messegeCount + " messeges without dying!");
                 if (input.equalsIgnoreCase("[Exit!]")) {
-                    simpleMessage("Time to sleep. Goodnight!");
+                    simpleMessege("Time to sleep. Goodnight!");
                     waitFor(3000);
                     System.exit(0);
                     return;
@@ -51,10 +51,9 @@ public class Runner
                 if (input.contains("e")) {
                     if (!input.equals(prevInput)) {
                         es++;
-                        if (es % 100 == 0) simpleMessage("You have used the letter 'e' " + es + " times");
+                        if (es % 100 == 0) simpleMessege("You have used the letter 'e' " + es + " times");
                     }
                 }
-
                 if (input.equals("[2048]".trim())) {
                     try {
                         game.isRunning();
@@ -62,7 +61,7 @@ public class Runner
                         Game game = new Game(readPoint, writePoint);
                     }
                 } else if (input.contains("nsfw")) {
-                    simpleMessage("*unzips pants*");
+                    simpleMessege("*unzips pants*");
                 } else if (input.contains("[loop]")) {
                     System.out.println(input.substring(9));
                     int n = 0;
@@ -74,43 +73,53 @@ public class Runner
                         writer.newLine();
                     }
                 } else if (input.contains(" bot")) {
-                    if (input.contains("computer")) simpleMessage("Im not a computer I am a real boy!");
-                    else if (Math.random() > 0.5) simpleMessage("Don't talk to me like im not here.");
-                    else simpleMessage("I can hear you you know.");
+                    if (input.contains("computer")) simpleMessege("Im not a computer I am a real boy!");
+                    else if (Math.random() > 0.5) simpleMessege("Don't talk to me like im not here.");
+                    else simpleMessege("I can hear you you know.");
                 } else if (input.contains("sad")) {
-                    simpleMessage("MessangerBot is sad when you are sad");
+                    simpleMessege("MessangerBot is sad when you are sad");
                 } else if (input.contains("japan") || input.contains("taiwan")) {
                     Mouse.move(writePoint);
                     Mouse.click();
                     writer.type("Taiwan #1!");
                 } else if (input.contains("goodnight")) {
-                    simpleMessage("<3");
-                }else if (input.contains("hello?"))
+                    simpleMessege("<3");
+                } else if(input.contains("messengerbot") && !input.contains(":"))
+                {
+                    simpleMessege("That's my name; don't wear it out.");
+                }
+                else if (input.contains("hello?"))
                 {
                     int option = (int)(Math.random()*5);
-                    if(option==0)simpleMessage("Hello");
-                    else if(option==1)simpleMessage("Hi! How are you?");
-                    else if(option==2)simpleMessage("Hello! I am MessengerBot.");
-                    else simpleMessage("*Beep Boop* I am a r0b0t!");
+                    if(option==0)simpleMessege("Hello");
+                    else if(option==1)simpleMessege("Hi! How are you?");
+                    else if(option==2)simpleMessege("Hello! I am MessengerBot.");
+                    else if(option==3)simpleMessege("\"Is it me you're looking for?\" - Lionel Richie" );
+                    else simpleMessege("*Beep Boop* I am a r0b0t!");
                 }
                 else if (input.contains("love you")) {
-                    if (Math.random() * 10 > 8) simpleMessage("Do you love Messanger bot?");
+                    if (Math.random() * 10 > 8) simpleMessege("Do you love Messanger bot?");
                 } else if (input.contains("sara") && !input.contains("*") && !input.contains("typing")) {
-                    if (Math.random() * 30 > 27) simpleMessage("Sarah*");
+                    if (Math.random() * 30 > 27) simpleMessege("Sarah*");
+                }
+                else if(input.contains("im"))
+                {
+                    simpleMessege("Hi, " + input.substring(input.indexOf("im"))  + ", im MessengerBot");
                 }
 
-                messageCount++;
+
+                messegeCount++;
             }
             writer.escape();
             prevInput = input;
         }
     }
 
-    public static void simpleMessage(String m)
+    public static void simpleMessege(String m)
     {
         Mouse.move(writePoint);
         Mouse.click();
-        writer.type("MessangerBot: ");
+        writer.type("MessengerBot: ");
         writer.type(m);
         writer.newLine();
     }
