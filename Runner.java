@@ -111,6 +111,7 @@ public class Runner
                 messegeCount++;
             }
             writer.escape();
+            //
             prevInput = input;
         }
     }
